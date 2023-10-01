@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Styles CSS personnalisés */
+
+
+#text-scroll {
+    white-space: nowrap;
+  }
+  
+
+  #text-scroll:hover {
+    animation: scrollText 10s linear forwards;
+  }
+  
+  @keyframes scrollText {
+    from {
+        transform: translateX(100%); 
+      }
+      to {
+        transform: translateX(-100%);
+      }
+  }

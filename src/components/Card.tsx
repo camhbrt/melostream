@@ -6,14 +6,14 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({data}) => {
     return (
-        <div className='p-4 rounded-3xl hover:bg-black/20 inline-block w-80'>
+        <div className='p-4 rounded-3xl hover:bg-black/20 inline-block w-80 mx-4'>
             
-            <img src={data.track.images.coverart} alt="" className='h-80'/>
+            <img src={data.track.images.coverart} alt="" className='h-60'/>
             
-            <div id="outer-text" className='text-3xl relative overflow-hidden'>
+            <div id="outer-text" className='text-2xl relative overflow-hidden'>
                 <p id="text-scroll">{data.track.title}</p>
             </div>
-            <p className='text-xl'>{data.track.subtitle}</p>
+            <p className='text-lg'>{data.track.subtitle}</p>
             
             <audio controls>
                 <source src={data.track.hub.actions[1].uri} type="audio/mpeg" />

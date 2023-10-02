@@ -1,19 +1,20 @@
 import { useState } from "react";
 import axios from 'axios';
-import Card from "./Card";
+import SearchBar from "./SearchBar";
+import Results from "./Results";
 
 
 const Home = () => {
 
-    const [inputValue, setInputValue] = useState<string>('') //string récupérée dans l'input
-    const [responseData, setResponseData] = useState<any>(null); //datas issues de l'API
+    const [query, setQuery] = useState(''); // État local pour stocker la valeur de l'input
+    const [responseData, setResponseData] = useState([]); // Données issues de l'API
 
-    const handleInput = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+
+    const performSearch = async (query: string) => {
         try {
             const response = await axios.get('https://shazam.p.rapidapi.com/search', {
                params: {
-                term: inputValue,
+                term: query,
                 locale: 'en-US',
                 offset: '0',
                 limit: '5'
@@ -26,37 +27,21 @@ const Home = () => {
             const responseData = response.data;
             console.log(responseData);
             setResponseData(responseData);
+            setQuery(query)
         } catch (error) {
             console.error(error);
         }
     }
 
     return (
-        <div className="relative">
-            {/* Bannière supérieure sans arrière-plan */}
-            <div className="top-0 z-50">
-                <form onSubmit={handleInput} className="flex items-center justify-between p-2">
-                    <button type="submit" className="text-xl">🔎</button>
-                    <input 
-                        type="text" 
-                        placeholder="Search for a music" 
-                        value={inputValue}  
-                        onChange={(e) => setInputValue(e.target.value)}
-                        className="bg-transparent outline-none  flex-grow ml-2"
-                    />
-                </form>
-            </div>
+        <div className="">
             
-            <div className="">
-                {responseData && (
-                    <div>
-                        <p className="text-5xl py-4 font-extrabold">Voici les résultats pour "<span className="text-green-400">{inputValue}</span>" :</p>
-                        {responseData.tracks.hits.map((song) => (
-                            <Card data={song} key={song.track.key} />
-                        ))}
-                    </div>
-                )} 
-            </div>
+            <SearchBar onSearch={performSearch}/>
+            {responseData && (
+                <Results 
+                    data = {responseData}
+                    query = {query}/>
+            )}
         </div>
     );
 };

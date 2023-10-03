@@ -3,28 +3,26 @@ import axios from 'axios';
 import SearchBar from "./SearchBar";
 import Results from "./Results";
 
-interface responseData{
-    data: {
-        tracks:{
-            hits: [
-                {
-                    track: {
-                        key: string,
-                        title: string,
-                        subtitle: string,
-                        images: {
-                            coverart: string
-                        },
-                        hub: {
-                            actions: Array<{
-                                uri: string,
-                            }>
-                                
-                        }
+interface responseData {
+    tracks:{
+        hits: [
+            {
+                track: {
+                    key: string,
+                    title: string,
+                    subtitle: string,
+                    images: {
+                        coverart: string
+                    },
+                    hub: {
+                        actions: Array<{
+                            uri: string,
+                        }>
+                            
                     }
                 }
-            ];
-        }
+            }
+        ];
     }
     query: string;
 
@@ -65,7 +63,7 @@ const Home = () => {
             <SearchBar onSearch={performSearch}/>
             {responseData && (
                 <Results 
-                    data = {responseData}
+                    data = {responseData.tracks}
                     query = {query}/>
             )}
         </div>

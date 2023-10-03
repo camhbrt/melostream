@@ -1,10 +1,27 @@
 import React from 'react';
 
 interface CardProps {
-    data: any;
+    
+    data: {
+        track: {
+            key: string,
+            title: string,
+            subtitle: string,
+            images: {
+                coverart: string
+            },
+            hub: {
+                actions: Array<{
+                    uri: string,
+                }>
+                    
+            }
+        }
+    }
 }
 
 const Card: React.FC<CardProps> = ({data}) => {
+
     return (
         <div className='p-4 rounded-3xl hover:bg-black/20 inline-block w-80 mx-4'>
             

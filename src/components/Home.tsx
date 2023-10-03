@@ -3,11 +3,37 @@ import axios from 'axios';
 import SearchBar from "./SearchBar";
 import Results from "./Results";
 
+interface responseData{
+    data: {
+        tracks:{
+            hits: [
+                {
+                    track: {
+                        key: string,
+                        title: string,
+                        subtitle: string,
+                        images: {
+                            coverart: string
+                        },
+                        hub: {
+                            actions: Array<{
+                                uri: string,
+                            }>
+                                
+                        }
+                    }
+                }
+            ];
+        }
+    }
+    query: string;
+
+}
 
 const Home = () => {
 
     const [query, setQuery] = useState(''); // État local pour stocker la valeur de l'input
-    const [responseData, setResponseData] = useState([]); // Données issues de l'API
+    const [responseData, setResponseData] = useState<responseData>(); // Données issues de l'API
 
 
     const performSearch = async (query: string) => {

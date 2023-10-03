@@ -3,7 +3,24 @@ import Card from './Card';
 interface ResultsProps {
     data: {
         tracks:{
-            hits: [];
+            hits: [
+                {
+                    track: {
+                        key: string,
+                        title: string,
+                        subtitle: string,
+                        images: {
+                            coverart: string
+                        },
+                        hub: {
+                            actions: Array<{
+                                uri: string,
+                            }>
+                                
+                        }
+                    }
+                }
+            ];
         }
     }
     query: string;

@@ -20,6 +20,7 @@ const SearchBar: React.FC<SearchBarProps> = ({onSearch}) => {
                 <span><BsSearch/></span>
                 <input 
                     type="text" 
+                    name="searchInput"
                     placeholder="Search for a music" 
                     value={inputValue}  
                     onChange={(e) => setInputValue(e.target.value)}
